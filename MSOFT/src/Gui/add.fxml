@@ -9,10 +9,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <TextField fx:id="name" layoutX="207.0" layoutY="71.0" prefHeight="26.0" prefWidth="186.0" />
-        <TextField fx:id="timelength" layoutX="207.0" layoutY="154.0" prefHeight="26.0" prefWidth="186.0" />
+        <TextField fx:id="type" layoutX="207.0" layoutY="154.0" prefHeight="26.0" prefWidth="186.0" />
         <Label layoutX="90.0" layoutY="88.0" text="Nazov" />
         <Label layoutX="90.0" layoutY="159.0" prefHeight="17.0" prefWidth="43.0" text="Typ" />
         <Button fx:id="Add" layoutX="221.0" layoutY="318.0" mnemonicParsing="false" onAction="#add" prefHeight="32.0" prefWidth="156.0" text="Pridaj" />

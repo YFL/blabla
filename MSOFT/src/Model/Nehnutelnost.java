@@ -4,36 +4,35 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Nehnutelnost {
-    int id;
-    String name;
-    String typ;
     int evidovana;
-    private final SimpleIntegerProperty idd;
-    private final SimpleStringProperty nam;
+    private final SimpleIntegerProperty id;
+    private final SimpleStringProperty name;
+    private final SimpleStringProperty type;
 
+    private static int lastId = 0;
 
     public int getId() {
-        return id;
+        return id.get();
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id.set(id);
     }
 
     public String getName() {
-        return name;
+        return name.get();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
-    public String getTyp() {
-        return typ;
+    public String getType() {
+        return type.get();
     }
 
     public void setTyp(String name) {
-        this.typ = typ;
+        this.type.set(name);
     }
 
     public int getEvidovana() {
@@ -44,18 +43,25 @@ public class Nehnutelnost {
         this.evidovana = 1;
     }
 
-    public Nehnutelnost(int id, String name, String t ) {
-        this.id = id;
-        this.name = name;
-        this.typ = t;
-        this.nam = new SimpleStringProperty(name);
-        this.idd = new SimpleIntegerProperty(id);
+    public Nehnutelnost(String name, String type) {
+        this.name = new SimpleStringProperty(name);
+        this.id = new SimpleIntegerProperty(newId());
+        this.type = new SimpleStringProperty(type);
     }
-    public String getNam() {
-        return nam.get();
+    public SimpleStringProperty getNameProp() {
+        return name;
     }
 
-    public int getIdd() {
-        return idd.get();
+    public SimpleIntegerProperty getIdProp() {
+        return id;
+    }
+
+    public SimpleStringProperty getTypeProp() {
+        return type;
+    }
+
+    private static int newId()
+    {
+        return ++lastId;
     }
 }

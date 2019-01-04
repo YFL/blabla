@@ -1,31 +1,32 @@
 package Controllers;
 
 import Model.Nehnutelnost;
+import com.sun.istack.internal.NotNull;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class AddContr implements Initializable {
+public class AddController implements Initializable {
     @FXML
     private TextField name;
     @FXML
-    private TextField typ;
+    private TextField type;
     @FXML
     private Button Add;
 
+    private ArrayList<Nehnutelnost> nehnutelnosti;
+
+    public AddController(@NotNull ArrayList<Nehnutelnost> nehnutelnosti)
+    {
+        this.nehnutelnosti = nehnutelnosti;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -33,6 +34,7 @@ public class AddContr implements Initializable {
 
 
     @FXML
-    public void add(ActionEvent event) throws SQLException {
+    public void add(ActionEvent event) {
+        nehnutelnosti.add(new Nehnutelnost(name.getText(), type.getText()));
     }
 }
