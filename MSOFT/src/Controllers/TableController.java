@@ -23,7 +23,7 @@ import javafx.stage.StageStyle;
 
 public class TableController implements Initializable {
     private ObservableList<Nehnutelnost> data;
-    private ArrayList<Nehnutelnost> f = new ArrayList();
+    private ArrayList<Nehnutelnost> f = new ArrayList<>();
     @FXML private TableView<Nehnutelnost> table_f;
     @FXML private TableColumn<Nehnutelnost, String> col_name = new TableColumn<>();
     @FXML private TableColumn<Nehnutelnost, Integer> col_id = new TableColumn<>();
@@ -34,12 +34,11 @@ public class TableController implements Initializable {
     @FXML private TextField screen;
     @FXML private Tab databazanehnutelnosti;
 
-    @FXML void watch() {
-    }
-
-    @FXML void zobrazdatabazu(){
+    @FXML private void zobrazdatabazu() {
         data.removeAll();
         data.addAll(f);
+        table_f.getItems().clear();
+        table_f.getItems().addAll(f);
     }
 
     @FXML
