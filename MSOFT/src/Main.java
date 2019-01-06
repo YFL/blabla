@@ -1,3 +1,4 @@
+import Controllers.TableController;
 import javafx.application.Application;
 import javafx.fxml.*;
 import javafx.scene.Parent;

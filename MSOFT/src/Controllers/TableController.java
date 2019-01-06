@@ -3,6 +3,7 @@ package Controllers;
 import Model.Nehnutelnost;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -22,8 +23,10 @@ import javafx.stage.StageStyle;
 
 
 public class TableController implements Initializable {
-    private ObservableList<Nehnutelnost> data;
     private ArrayList<Nehnutelnost> f = new ArrayList<>();
+    private final int NEHNUTELNOSTI_PER_STRANA;
+    private int firstIndex;
+    private int lastIndex;
     @FXML private TableView<Nehnutelnost> table_f;
     @FXML private TableColumn<Nehnutelnost, String> col_name = new TableColumn<>();
     @FXML private TableColumn<Nehnutelnost, Integer> col_id = new TableColumn<>();
@@ -34,18 +37,26 @@ public class TableController implements Initializable {
     @FXML private TextField screen;
     @FXML private Tab databazanehnutelnosti;
 
+    public TableController()
+    {
+        NEHNUTELNOSTI_PER_STRANA = 25;
+        firstIndex = 0;
+        lastIndex = 24;
+    }
+
     @FXML private void zobrazdatabazu() {
-        data.removeAll();
-        data.addAll(f);
+        ArrayList<Nehnutelnost> subArray = new ArrayList<>();
+        for(int i = firstIndex; i <= lastIndex && i < f.size(); i++)
+        {
+            subArray.add(f.get(i));
+        }
         table_f.getItems().clear();
-        table_f.getItems().addAll(f);
+        table_f.getItems().addAll(subArray);
     }
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
         setCellTable1();
-        data = FXCollections.observableArrayList(f);
-        table_f.setItems(data);
     }
 
     @FXML
@@ -64,15 +75,17 @@ public class TableController implements Initializable {
     }
 
     @FXML
-    void up() {
-        data.removeAll();
+    private void up() {
+        indiciesUp();
         table_f.getItems().clear();
+        zobrazdatabazu();
     }
 
     @FXML
-    void down() {
-        data.removeAll();
+    private void down() {
+        indiciesDown();
         table_f.getItems().clear();
+        zobrazdatabazu();
     }
 
 
@@ -80,5 +93,23 @@ public class TableController implements Initializable {
         col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
+    }
+
+    private void indiciesUp()
+    {
+        if(firstIndex - NEHNUTELNOSTI_PER_STRANA >= 0)
+        {
+            firstIndex -= NEHNUTELNOSTI_PER_STRANA;
+            lastIndex -= NEHNUTELNOSTI_PER_STRANA;
+        }
+    }
+
+    private void indiciesDown()
+    {
+        if(firstIndex + NEHNUTELNOSTI_PER_STRANA < f.size())
+        {
+            firstIndex += NEHNUTELNOSTI_PER_STRANA;
+            lastIndex += NEHNUTELNOSTI_PER_STRANA;
+        }
     }
 }
